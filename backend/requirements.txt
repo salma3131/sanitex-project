@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+python-multipart
+firebase-admin
+transformers
+torch
+opencv-python
+spacy
+geopy
+pydantic
+sqlalchemy
+# Voice processing dependencies
+SpeechRecognition==3.10.0
+googletrans==3.1.0a0
+Pillow>=9.0.0
+scipy>=1.9.0
+numpy>=1.21.0

@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Frontend Dev Server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/frontend"
+			},
+			"isBackground": true,
+			"group": "build"
+		},
+		{
+			"label": "Run Backend Server",
+			"type": "shell",
+			"command": "c:/python313/python.exe",
+			"args": [
+				"app.py"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/backend"
+			},
+			"isBackground": true
+		}
+	]
+}

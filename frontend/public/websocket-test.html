@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Connection Test</title>
+</head>
+<body>
+    <h1>WebSocket Connection Test</h1>
+    <div id="status">Connecting...</div>
+    <div id="messages"></div>
+    <button onclick="testConnection()">Test Connection</button>
+    
+    <script>
+        function testConnection() {
+            const wsUrl = 'ws://localhost:8001/ws';
+            console.log('=== Testing WebSocket Connection ===');
+            console.log('URL:', wsUrl);
+            console.log('ReadyState:', document.readyState);
+            
+            const statusDiv = document.getElementById('status');
+            const messagesDiv = document.getElementById('messages');
+            
+            statusDiv.innerHTML = 'Attempting to connect...';
+            
+            try {
+                const ws = new WebSocket(wsUrl);
+                console.log('WebSocket object created');
+                
+                ws.onopen = function(event) {
+                    console.log('✅ WebSocket connected successfully!');
+                    statusDiv.innerHTML = 'Connected successfully';
+                    statusDiv.style.color = 'green';
+                    
+                    ws.send('Test message from browser');
+                    console.log('📤 Test message sent');
+                };
+                
+                ws.onmessage = function(event) {
+                    console.log('📥 Message received:', event.data);
+                    const messageDiv = document.createElement('div');
+                    messageDiv.textContent = 'Received: ' + event.data;
+                    messagesDiv.appendChild(messageDiv);
+                };
+                
+                ws.onclose = function(event) {
+                    console.log('🔌 WebSocket disconnected');
+                    console.log('Close code:', event.code);
+                    console.log('Close reason:', event.reason);
+                    console.log('Was clean:', event.wasClean);
+                    statusDiv.innerHTML = 'Disconnected';
+                    statusDiv.style.color = 'red';
+                };
+                
+                ws.onerror = function(error) {
+                    console.error('❌ WebSocket error:', error);
+                    console.error('Error details:', JSON.stringify(error, null, 2));
+                    statusDiv.innerHTML = 'Error: ' + JSON.stringify(error);
+                    statusDiv.style.color = 'red';
+                };
+                
+            } catch (error) {
+                console.error('❌ Connection error:', error);
+                statusDiv.innerHTML = 'Connection error: ' + error.message;
+                statusDiv.style.color = 'red';
+            }
+        }
+        
+        // Auto-test on page load
+        window.addEventListener('load', function() {
+            setTimeout(testConnection, 1000);
+        });
+    </script>
+</body>
+</html>
