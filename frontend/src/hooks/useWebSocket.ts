@@ -193,7 +193,7 @@ class WebSocketManager {
         }
         
         instance.connectionState.isConnecting = false;
-        console.log('🔌 WebSocket disconnected');
+        console.log('🔌 WebSocket disco1nnected');
         console.log('Close code:', event.code);
         console.log('Close reason:', event.reason);
         console.log('Was clean:', event.wasClean);
