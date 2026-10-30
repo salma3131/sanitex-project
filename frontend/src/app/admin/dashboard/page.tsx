@@ -100,7 +100,12 @@ export default function AdminDashboard() {
                     <td className="py-4">
                       <select
                         value={report.status}
-                        onChange={(e) => updateStatus(report.id, e.target.value as any)}
+                        onChange={(e) => {
+                          const status = e.currentTarget.value;
+                          if (status === 'pending' || status === 'in-progress' || status === 'resolved') {
+                            updateStatus(report.id, status);
+                          }
+                        }}
                         className="px-3 py-1 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-green-600"
                       >
                         <option value="pending">Pending</option>
